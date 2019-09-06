@@ -1,0 +1,13 @@
+{
+  "Product": {
+    "Name": "Red Analytics",
+    "Developer": "RedCoder",
+    "Contact": "mzero651@gmail.com",
+    "Version" : "1.0",
+    "State": "Release"
+  },
+
+  "Requirements": {
+    "JAVA": "1.8.0"
+  }
+}
