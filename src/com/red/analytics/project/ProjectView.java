@@ -70,7 +70,7 @@ public class ProjectView {
         programmer = new JTextField(6);
         projectPath = new JTextField(6);
         choosePathButton = new JButton("Choose");
-        projectSDKVersion = new JComboBox(new String[]{"Red Framework 1.01 Enterprise", "Red Framework 1.01 Console App Development Kit"});
+        projectSDKVersion = new JComboBox(new String[]{"Red Framework 1.0.1 Enterprise", "Red Framework 1.0.1 Console App Development Kit"});
         secretKeyCheckBox = new JCheckBox("Generate New Secret Key");
         secretKeyCheckBox.setSelected(true);
 
