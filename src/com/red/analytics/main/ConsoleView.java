@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 
 public class ConsoleView {
 
@@ -43,7 +42,6 @@ public class ConsoleView {
     private JButton analyseButton;
     private JButton runApplicationButton;
     private JButton stopApplicationButton;
-    private JLabel applicationStatusLabel;
     private ButtonGroup projectModeButtonGroup;
     private JRadioButton maintenanceRadioButton;
     private JRadioButton productionRadioButton;
@@ -80,7 +78,6 @@ public class ConsoleView {
                 MainController.mainFrameCloseEvent();
             }
         });
-
 
         // Create and Set Layout to window
 
@@ -235,6 +232,7 @@ public class ConsoleView {
 
         runApplicationMenuItem = new JMenuItem("Run Application");
 
+
         runApplicationMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -244,12 +242,7 @@ public class ConsoleView {
 
         stopApplicationMenuItem = new JMenuItem("Stop Application");
 
-        stopApplicationMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MainController.stopConsoleAppAction();
-            }
-        });
+        stopApplicationMenuItem.setEnabled(false);
 
         maintenanceModeMenuItem = new JMenuItem("Maintenance Mode");
 
@@ -395,12 +388,7 @@ public class ConsoleView {
 
         stopApplicationButton = new JButton("Stop");
 
-        stopApplicationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MainController.stopConsoleAppAction();
-            }
-        });
+        stopApplicationButton.setEnabled(false);
 
         mainContainer.add(stopApplicationButton, GBC);
 
@@ -413,17 +401,6 @@ public class ConsoleView {
         generateViewButton.setEnabled(false);
 
         mainContainer.add(generateViewButton, GBC);
-
-
-        GBC.insets = new Insets(1, 40, 1, 0);
-        GBC.gridx = 1;
-        GBC.gridy = 4;
-
-        applicationStatusLabel = new JLabel("App Status: STOPPED");
-
-        applicationStatusLabel.setForeground(Color.RED);
-
-        mainContainer.add(applicationStatusLabel, GBC);
 
 
         GBC.insets = new Insets(7, 0, 7, 0);
@@ -759,13 +736,6 @@ public class ConsoleView {
         this.stopApplicationButton = stopApplicationButton;
     }
 
-    public JLabel getApplicationStatusLabel() {
-        return applicationStatusLabel;
-    }
-
-    public void setApplicationStatusLabel(JLabel applicationStatusLabel) {
-        this.applicationStatusLabel = applicationStatusLabel;
-    }
 
     public ButtonGroup getProjectModeButtonGroup() {
         return projectModeButtonGroup;

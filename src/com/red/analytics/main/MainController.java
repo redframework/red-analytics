@@ -2,10 +2,7 @@ package com.red.analytics.main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -160,29 +157,11 @@ public class MainController {
 
         Runtime runtime = Runtime.getRuntime();
         try {
-            php_service = runtime.exec("cmd.exe"+ " /c "+ currentPath.getParent().substring(0, 1).toUpperCase() + ":"+ " cd \""+ URLDecoder.decode(currentPath.getParent(), StandardCharsets.UTF_8)+ "\" & start cmd.exe /k"+ " \"php application\"");
-            JLabel appStatusLabel = consoleView.getApplicationStatusLabel();
-            appStatusLabel.setText("App Status: RUNNING");
-            appStatusLabel.setForeground(Color.green);
-            JOptionPane.showMessageDialog(mainWindow, "Application is Running", "Application is Running", JOptionPane.INFORMATION_MESSAGE);
+            runtime.exec("cmd.exe"+ " /c "+ currentPath.getParent().substring(0, 1).toUpperCase() + ":"+ " cd \""+ URLDecoder.decode(currentPath.getParent(), StandardCharsets.UTF_8)+ "\" & start cmd.exe /k"+ " \"php application\"");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(mainWindow, "Error ! Make Sure You Have installed PHP on Your Computer.", "Error on Running Development Server", JOptionPane.ERROR_MESSAGE);
         }
 
-    }
-
-    public static void stopConsoleAppAction(){
-
-
-        if (php_service == null){
-            JOptionPane.showMessageDialog(mainWindow, "Application is Already Stopped", "Application is Stopped", JOptionPane.WARNING_MESSAGE);
-        } else {
-            php_service.destroy();
-            php_service = null;
-            JLabel appStatusLabel = consoleView.getApplicationStatusLabel();
-            appStatusLabel.setText("App Status: STOPPED");
-            appStatusLabel.setForeground(Color.RED);
-        }
     }
 
     public static void changeModeAction(int mode) throws IOException {
@@ -938,9 +917,7 @@ public class MainController {
 
 
             int result = 0;
-            if (MainController.getEnvironment().getJSONObject("PROJECT").getString("SDK").equals("Red Framework Console Application")){
-                result = JOptionPane.showConfirmDialog(mainWindow, "Application is Running, Do you Want to Stop and Exit ?", "Application is Running", JOptionPane.YES_NO_OPTION);
-            } else {
+            if (!MainController.getEnvironment().getJSONObject("PROJECT").getString("SDK").equals("Red Framework Console Application")){
                 result = JOptionPane.showConfirmDialog(mainWindow, "Development Server is Running, Do you Want to Stop and Exit ?", "Development Server is Running", JOptionPane.YES_NO_OPTION);
             }
 
